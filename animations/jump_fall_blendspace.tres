@@ -1,0 +1,16 @@
+[gd_resource type="AnimationNodeBlendSpace1D" load_steps=3 format=3 uid="uid://sjjwelgmi3d7"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5j3oo"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m6j52"]
+animation = &"Fall"
+
+[resource]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5j3oo")
+blend_point_0/pos = 5.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_m6j52")
+blend_point_1/pos = -5.0
+min_space = -5.0
+max_space = 5.0
+snap = 0.5

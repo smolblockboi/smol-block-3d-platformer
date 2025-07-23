@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://m3ljgcg18ba7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gojnm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_1c2mv"]
+sky_material = SubResource("ProceduralSkyMaterial_gojnm")
+
+[sub_resource type="Environment" id="Environment_f7g2b"]
+background_mode = 2
+sky = SubResource("Sky_1c2mv")
+tonemap_mode = 2
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hsoxx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hsoxx"]
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsoxx"]
+albedo_color = Color(0.145098, 0.168627, 0.203922, 1)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f7g2b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_hsoxx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_hsoxx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_hsoxx")

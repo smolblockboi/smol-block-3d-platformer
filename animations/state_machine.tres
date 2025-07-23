@@ -1,0 +1,35 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=9 format=3 uid="uid://brfhvb57fxrey"]
+
+[ext_resource type="AnimationNodeBlendSpace1D" uid="uid://d0xi0ahtrgqr1" path="res://animations/walk_run_blendspace.tres" id="1_45qm1"]
+[ext_resource type="AnimationNodeBlendSpace1D" uid="uid://sjjwelgmi3d7" path="res://animations/jump_fall_blendspace.tres" id="1_kmsv1"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://chjjwl28sj0hr" path="res://animations/ground_pound_blendtree.tres" id="1_njc31"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mdj6m"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_njc31"]
+advance_mode = 2
+advance_expression = "!character_controller.is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o2of3"]
+advance_mode = 2
+advance_expression = "character_controller.is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4cjx8"]
+advance_mode = 2
+advance_expression = "character_controller.body_state == character_controller.BodyStates.GROUND_POUND"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_brksk"]
+advance_mode = 2
+advance_expression = "character_controller.is_on_floor()"
+
+[resource]
+states/End/position = Vector2(1044, 100)
+states/Ground_Pound_BlendTree/node = ExtResource("1_njc31")
+states/Ground_Pound_BlendTree/position = Vector2(706, 222)
+states/Jump_Fall_Blendspace/node = ExtResource("1_kmsv1")
+states/Jump_Fall_Blendspace/position = Vector2(706, 100)
+states/Walk_Run_Blendspace/node = ExtResource("1_45qm1")
+states/Walk_Run_Blendspace/position = Vector2(413, 100)
+transitions = ["Start", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_mdj6m"), "Walk_Run_Blendspace", "Jump_Fall_Blendspace", SubResource("AnimationNodeStateMachineTransition_njc31"), "Jump_Fall_Blendspace", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_o2of3"), "Jump_Fall_Blendspace", "Ground_Pound_BlendTree", SubResource("AnimationNodeStateMachineTransition_4cjx8"), "Ground_Pound_BlendTree", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_brksk")]
+graph_offset = Vector2(-21, 36)

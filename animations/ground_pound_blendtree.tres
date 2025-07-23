@@ -1,0 +1,19 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=4 format=3 uid="uid://chjjwl28sj0hr"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5j3oo"]
+animation = &"GroundPoundStart"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m6j52"]
+animation = &"Sit"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_5j3oo"]
+
+[resource]
+graph_offset = Vector2(-705.909, 9.45453)
+nodes/GroundPoundStart/node = SubResource("AnimationNodeAnimation_5j3oo")
+nodes/GroundPoundStart/position = Vector2(-400, 340)
+nodes/Sit/node = SubResource("AnimationNodeAnimation_m6j52")
+nodes/Sit/position = Vector2(-360, 100)
+nodes/Trigger/node = SubResource("AnimationNodeOneShot_5j3oo")
+nodes/Trigger/position = Vector2(-100, 140)
+node_connections = [&"Trigger", 0, &"Sit", &"Trigger", 1, &"GroundPoundStart", &"output", 0, &"Trigger"]

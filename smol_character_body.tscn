@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://conqjasembnyk"]
+
+[ext_resource type="Script" uid="uid://dvot36t2tpfej" path="res://smol_character_body.gd" id="1_jhqs5"]
+[ext_resource type="PackedScene" uid="uid://vm6hp0etitle" path="res://smol.tscn" id="1_xfcub"]
+[ext_resource type="Script" uid="uid://bgmg6422npasl" path="res://jump.gd" id="3_2h5ot"]
+[ext_resource type="Script" uid="uid://57ft75gxoedt" path="res://ground_pound.gd" id="4_s6ail"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jhqs5"]
+radius = 0.35
+
+[node name="SmolCharacterBody" type="CharacterBody3D" node_paths=PackedStringArray("model_scene")]
+script = ExtResource("1_jhqs5")
+model_scene = NodePath("smol")
+
+[node name="smol" parent="." node_paths=PackedStringArray("character_controller") instance=ExtResource("1_xfcub")]
+character_controller = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.350267, 0)
+shape = SubResource("SphereShape3D_jhqs5")
+
+[node name="TwistPivot" type="Node3D" parent="."]
+
+[node name="PitchPivot" type="Node3D" parent="TwistPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("3_2h5ot")
+
+[node name="GroundPound" type="Node" parent="."]
+script = ExtResource("4_s6ail")
