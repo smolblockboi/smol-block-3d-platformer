@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ground_pound") and !player.is_on_floor():
 		if player.body_state != player.BodyStates.GROUND_POUND:
 			do_ability()
-	
+
 	if is_active:
 		match phase:
 			Phases.START:
@@ -24,18 +24,18 @@ func _physics_process(delta: float) -> void:
 				player.fall_speed *= fall_speed
 			Phases.END:
 				pass
-	
+
 	if player.is_on_floor():
 		ground_pound_finished.emit()
 
 
 func do_ability():
 	ground_pound_finished.connect(_on_ground_pound_finished, CONNECT_ONE_SHOT)
-	
+
 	player.velocity = Vector3.ZERO
-	
+
 	player.body_state = player.BodyStates.GROUND_POUND
-	
+
 	phase = Phases.START
 
 

@@ -25,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			twist_input = -event.relative.x * mouse_sensitivity
@@ -36,26 +36,26 @@ func _process(delta: float) -> void:
 	twist_pivot.rotate_y(twist_input)
 	pitch_pivot.rotate_x(pitch_input)
 	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(-30), deg_to_rad(30))
-	
+
 	twist_input = 0.0
 	pitch_input = 0.0
 
 
 func _physics_process(delta: float) -> void:
 	var input_dir : Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
+
 	var movement : Vector3 = Vector3(
-		input_dir.x * move_speed, 
-		-fall_speed * delta, 
+		input_dir.x * move_speed,
+		-fall_speed * delta,
 		input_dir.y * move_speed
 	)
-	
+
 	var y_velocity := velocity.y
 	velocity.y = 0.0
 	velocity = velocity.move_toward(twist_pivot.basis * movement, acceleration * delta)
 	velocity.y = y_velocity + -fall_speed * delta
-	
+
 	move_and_slide()
-	
+
 	if input_dir:
 		model_scene.look_at(model_scene.global_position - (twist_pivot.basis * Vector3(input_dir.x, 0.0, input_dir.y)))

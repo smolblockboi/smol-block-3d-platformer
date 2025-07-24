@@ -11,10 +11,10 @@ class_name Smol extends Node3D
 func _process(delta: float) -> void:
 	if animation_tree:
 		animation_tree.set(
-			"parameters/Walk_Run_Blendspace/blend_position", 
+			"parameters/Walk_Run_Blendspace/blend_position",
 			(character_controller.velocity * Vector3(1.0, 0.0, 1.0)).length()
 		)
 		animation_tree.set(
-			"parameters/Jump_Fall_Blendspace/blend_position", 
+			"parameters/Jump_Fall_Blendspace/blend_position",
 			character_controller.velocity.y
 		)
