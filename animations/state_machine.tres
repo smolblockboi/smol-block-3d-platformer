@@ -1,8 +1,14 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=9 format=3 uid="uid://brfhvb57fxrey"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=16 format=3 uid="uid://brfhvb57fxrey"]
 
 [ext_resource type="AnimationNodeBlendSpace1D" uid="uid://d0xi0ahtrgqr1" path="res://animations/walk_run_blendspace.tres" id="1_45qm1"]
 [ext_resource type="AnimationNodeBlendSpace1D" uid="uid://sjjwelgmi3d7" path="res://animations/jump_fall_blendspace.tres" id="1_kmsv1"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://chjjwl28sj0hr" path="res://animations/ground_pound_blendtree.tres" id="1_njc31"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dyxfk1iwelf4x" path="res://animations/roll_state_machine.tres" id="2_njc31"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_njc31"]
+animation = &"Dive"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o2of3"]
+animation = &"FrontRollStart"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mdj6m"]
 advance_mode = 2
@@ -15,21 +21,45 @@ advance_expression = "!character_controller.is_on_floor()"
 advance_mode = 2
 advance_expression = "character_controller.is_on_floor()"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4cjx8"]
-advance_mode = 2
-advance_expression = "character_controller.body_state == character_controller.BodyStates.GROUND_POUND"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_brksk"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_afnuo"]
+advance_mode = 2
+advance_expression = "(character_controller.action_state != character_controller.ActionStates.ROLLING) and !character_controller.is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_awphc"]
+advance_mode = 2
+advance_expression = "(character_controller.action_state == character_controller.ActionStates.ROLLING)"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sj88s"]
+advance_mode = 2
+advance_expression = "(character_controller.action_state != character_controller.ActionStates.ROLLING)"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_14mnv"]
 advance_mode = 2
 advance_expression = "character_controller.is_on_floor()"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4cjx8"]
+advance_mode = 2
+advance_expression = "(character_controller.action_state == character_controller.ActionStates.ROLLING)"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h4v1n"]
+switch_mode = 2
+advance_mode = 2
+
 [resource]
+states/Dive/node = SubResource("AnimationNodeAnimation_njc31")
+states/Dive/position = Vector2(700, 189)
 states/End/position = Vector2(1044, 100)
-states/Ground_Pound_BlendTree/node = ExtResource("1_njc31")
-states/Ground_Pound_BlendTree/position = Vector2(706, 222)
+states/FrontRollStart/node = SubResource("AnimationNodeAnimation_o2of3")
+states/FrontRollStart/position = Vector2(343, 199)
 states/Jump_Fall_Blendspace/node = ExtResource("1_kmsv1")
 states/Jump_Fall_Blendspace/position = Vector2(706, 100)
+states/Roll_StateMachine/node = ExtResource("2_njc31")
+states/Roll_StateMachine/position = Vector2(512, 284)
 states/Walk_Run_Blendspace/node = ExtResource("1_45qm1")
 states/Walk_Run_Blendspace/position = Vector2(413, 100)
-transitions = ["Start", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_mdj6m"), "Walk_Run_Blendspace", "Jump_Fall_Blendspace", SubResource("AnimationNodeStateMachineTransition_njc31"), "Jump_Fall_Blendspace", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_o2of3"), "Jump_Fall_Blendspace", "Ground_Pound_BlendTree", SubResource("AnimationNodeStateMachineTransition_4cjx8"), "Ground_Pound_BlendTree", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_brksk")]
-graph_offset = Vector2(-21, 36)
+transitions = ["Start", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_mdj6m"), "Walk_Run_Blendspace", "Jump_Fall_Blendspace", SubResource("AnimationNodeStateMachineTransition_njc31"), "Jump_Fall_Blendspace", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_o2of3"), "Roll_StateMachine", "Walk_Run_Blendspace", SubResource("AnimationNodeStateMachineTransition_brksk"), "Roll_StateMachine", "Jump_Fall_Blendspace", SubResource("AnimationNodeStateMachineTransition_afnuo"), "Jump_Fall_Blendspace", "Dive", SubResource("AnimationNodeStateMachineTransition_awphc"), "Dive", "Jump_Fall_Blendspace", SubResource("AnimationNodeStateMachineTransition_sj88s"), "Dive", "Roll_StateMachine", SubResource("AnimationNodeStateMachineTransition_14mnv"), "Walk_Run_Blendspace", "FrontRollStart", SubResource("AnimationNodeStateMachineTransition_4cjx8"), "FrontRollStart", "Roll_StateMachine", SubResource("AnimationNodeStateMachineTransition_h4v1n")]
+graph_offset = Vector2(-25, 88)

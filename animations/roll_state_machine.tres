@@ -1,0 +1,27 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=6 format=3 uid="uid://dyxfk1iwelf4x"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5j3oo"]
+animation = &"FrontRoll"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m6j52"]
+animation = &"FrontRollEnd"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_25t7u"]
+advance_mode = 2
+advance_expression = "(character_controller.action_state != character_controller.ActionStates.ROLLING)"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5j3oo"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cp2it"]
+advance_mode = 2
+
+[resource]
+states/FrontRoll/node = SubResource("AnimationNodeAnimation_5j3oo")
+states/FrontRoll/position = Vector2(446, 100)
+states/FrontRollEnd/node = SubResource("AnimationNodeAnimation_m6j52")
+states/FrontRollEnd/position = Vector2(686, 100)
+transitions = ["FrontRoll", "FrontRollEnd", SubResource("AnimationNodeStateMachineTransition_25t7u"), "FrontRollEnd", "End", SubResource("AnimationNodeStateMachineTransition_5j3oo"), "Start", "FrontRoll", SubResource("AnimationNodeStateMachineTransition_cp2it")]
+graph_offset = Vector2(0, -52)
