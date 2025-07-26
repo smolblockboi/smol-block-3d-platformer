@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dvyghtiyj2il3"]
 
+[ext_resource type="Material" uid="uid://bvpxgit5gpsp8" path="res://assets/prototype_textures/Dark/black.tres" id="1_7oaxx"]
 [ext_resource type="PackedScene" uid="uid://conqjasembnyk" path="res://smol_character_body.tscn" id="1_gn8vd"]
-[ext_resource type="Material" uid="uid://b4gl38m2fd7yd" path="res://temp_materials/greeeeen.tres" id="1_k7nup"]
 [ext_resource type="Material" uid="uid://cfdso1l7ipqyl" path="res://temp_materials/brown.tres" id="2_7oaxx"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_gn8vd"]
@@ -10,12 +10,12 @@
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
-[sub_resource type="Sky" id="Sky_1c2mv"]
+[sub_resource type="Sky" id="Sky_7oaxx"]
 sky_material = SubResource("ProceduralSkyMaterial_gn8vd")
 
 [sub_resource type="Environment" id="Environment_k7nup"]
 background_mode = 2
-sky = SubResource("Sky_1c2mv")
+sky = SubResource("Sky_7oaxx")
 tonemap_mode = 2
 fog_enabled = true
 fog_mode = 1
@@ -23,8 +23,8 @@ fog_light_color = Color(0.379687, 0.596472, 0.584997, 1)
 fog_light_energy = 1.1
 fog_density = 0.6299
 fog_sky_affect = 0.53
-fog_depth_begin = 0.0
-fog_depth_end = 50.0
+fog_depth_begin = 50.0
+fog_depth_end = 150.0
 
 [node name="Node3D" type="Node3D"]
 
@@ -33,20 +33,13 @@ fog_depth_end = 50.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_gn8vd")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="floor" type="CSGCombiner3D" parent="."]
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="floor"]
 transform = Transform3D(0.999998, -0.00171462, 0.000138476, 0.00171451, 0.999998, 0.000770814, -0.000139806, -0.000770574, 1, 0, 0, 0)
 size = Vector3(253.436, 0.1, 256.11)
-material = ExtResource("1_k7nup")
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2297, 16.7692, 15.3343)
-radius = 6.4248
-height = 35.7588
-sides = 16
-material = ExtResource("2_7oaxx")
+material = ExtResource("1_7oaxx")
 
 [node name="north_east_trunk" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -181,9 +174,9 @@ sides = 16
 material = ExtResource("2_7oaxx")
 
 [node name="CSGCylinder3D7" type="CSGCylinder3D" parent="south_west_trunk"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5142, 24.9868, 32.5237)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5142, 24.0714, 32.5237)
 radius = 8.33447
-height = 2.50549
+height = 4.33624
 sides = 16
 material = ExtResource("2_7oaxx")
 
@@ -260,6 +253,17 @@ size = Vector3(22.2047, 2.70801, 2.81543)
 transform = Transform3D(0.82979, -0.514185, -0.216937, 0.502756, 0.857483, -0.109356, 0.242249, -0.018324, 0.970041, 20.5033, 13.8898, 4.6902)
 size = Vector3(36.5265, 2.70801, 2.81543)
 
+[node name="south_east_trunk" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.1424, 0, -5.20403)
+use_collision = true
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="south_east_trunk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.3721, 16.7692, 20.5383)
+radius = 6.4248
+height = 35.7588
+sides = 16
+material = ExtResource("2_7oaxx")
+
 [node name="playground_1" type="CSGCombiner3D" parent="."]
 use_collision = true
 
@@ -296,6 +300,7 @@ transform = Transform3D(-0.0562398, 0, 0.998417, 0.864655, 0.5, 0.0487051, -0.49
 size = Vector3(8, 1, 1)
 
 [node name="walls" type="CSGCombiner3D" parent="."]
+use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="walls"]
 transform = Transform3D(0.796994, 0, -0.603987, 0, 1, 0, 0.603987, 0, 0.796994, -76.3277, 33.4322, -51.6444)
@@ -359,9 +364,6 @@ material = ExtResource("2_7oaxx")
 
 [node name="SmolCharacterBody" parent="." instance=ExtResource("1_gn8vd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -123.248, 0.546371, 12.6329)
-
-[node name="Camera3D" parent="SmolCharacterBody/TwistPivot/PitchPivot" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.885507, 0.464626, 0, -0.464626, 0.885507, 0, 2.49422, 4)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k7nup")

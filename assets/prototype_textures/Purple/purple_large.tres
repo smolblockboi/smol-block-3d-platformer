@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cps8ahl4wdfqj"]
+
+[ext_resource type="Texture2D" uid="uid://c0o1vkv3ufvmb" path="res://assets/prototype_textures/Purple/texture_01.png" id="1_awl33"]
+
+[resource]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.75, 0.75, 0.75, 1)
+albedo_texture = ExtResource("1_awl33")
+uv1_scale = Vector3(0.032, 0.032, 0.032)
+uv1_triplanar = true
+texture_filter = 0

@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://4qegmmgn65nq"]
+
+[ext_resource type="Texture2D" uid="uid://dopr11a5knr4q" path="res://assets/prototype_textures/Light/texture_13.png" id="1_g30vk"]
+
+[resource]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_g30vk")
+uv1_world_triplanar = true
+texture_filter = 0

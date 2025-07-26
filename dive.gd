@@ -1,6 +1,6 @@
 extends Ability
 
-@export var dive_speed : float = 20.0
+@export var dive_speed : float = 14.0
 @export var vertical_gain : float = 0.5
 
 var action_held_down : bool
@@ -10,7 +10,7 @@ var dives_left : int = 1
 func _process(delta: float) -> void:
 	if player.action_state != player.ActionStates.ROLLING:
 		action_held_down = false
-	
+
 	if not player.is_on_floor():
 		if dives_left > 0:
 			if Input.is_action_just_pressed("dive") and player.get_forward_input_value() > 0.5:

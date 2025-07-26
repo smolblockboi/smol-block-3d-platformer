@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dk17x5khy0w67"]
+
+[ext_resource type="Texture2D" uid="uid://c5hlj86pm7j1h" path="res://assets/prototype_textures/Green/texture_01.png" id="1_t3aa8"]
+
+[resource]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_t3aa8")
+uv1_triplanar = true
+texture_filter = 0

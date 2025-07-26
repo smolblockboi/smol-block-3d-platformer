@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b8t4y4tqnnewt"]
+
+[ext_resource type="Texture2D" uid="uid://urwmtrt2dna6" path="res://assets/prototype_textures/Orange/texture_01.png" id="1_o7v1q"]
+
+[resource]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_o7v1q")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+texture_filter = 0

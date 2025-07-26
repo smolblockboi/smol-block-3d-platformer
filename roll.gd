@@ -1,6 +1,6 @@
 extends Ability
 
-@export var roll_speed : float = 20.0
+@export var roll_speed : float = 12.0
 @export var roll_start_threshold : float = 8.0
 
 

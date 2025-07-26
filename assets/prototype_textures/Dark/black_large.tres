@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ddhef08j0510y"]
+
+[ext_resource type="Texture2D" uid="uid://bo1b4m0a0f7sf" path="res://assets/prototype_textures/Dark/texture_13.png" id="1_fjk3n"]
+
+[resource]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.75, 0.75, 0.75, 1)
+albedo_texture = ExtResource("1_fjk3n")
+uv1_scale = Vector3(0.032, 0.032, 0.032)
+uv1_triplanar = true
+texture_filter = 0

@@ -15,8 +15,8 @@ var pitch_input := 0.0
 
 @export var model_scene : Smol
 
-@export var run_speed : float = 10.0
-var move_speed : float = 10.0
+@export var run_speed : float = 9
+var move_speed : float = 9
 
 @export var acceleration : float = 30.0
 var move_acceleration : float = 30
@@ -40,10 +40,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			get_tree().quit()
-	
+
 	if event is InputEventJoypadButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			twist_input = -event.relative.x * mouse_sensitivity
@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 		twist_input = -camera_input.x * controller_sensitivity
 	if abs(camera_input.y) >= InputMap.action_get_deadzone("camera_up"):
 		pitch_input = -camera_input.y * controller_sensitivity
-	
+
 	twist_pivot.rotate_y(twist_input)
 	pitch_pivot.rotate_x(pitch_input)
 	pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(-30), deg_to_rad(30))
@@ -67,29 +67,29 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
+
 	if action_state == ActionStates.ROLLING:
 		input_dir.y = -1
-	
-	
+
+
 	var movement : Vector3 = Vector3(
 		input_dir.x * move_speed,
 		-fall_speed * delta,
 		input_dir.y * move_speed
 	)
-	
+
 	var y_velocity := velocity.y
 	velocity.y = 0.0
 	velocity = velocity.move_toward(twist_pivot.basis * movement, acceleration * delta)
 	velocity.y = y_velocity + -fall_speed * delta
-	
+
 	last_frame_velocity = velocity
-	
+
 	move_and_slide()
-	
+
 	if input_dir:
 		model_scene.look_at(model_scene.global_position - (twist_pivot.basis * Vector3(input_dir.x, 0.0, input_dir.y)))
-	
+
 	state_label.text = "Action State: %s" % ActionStates.keys()[action_state].to_upper()
 	double_jump_label.text = "Can Double Jump: %s" % str($DoubleJump.jumps_left > 0).to_upper()
 	dive_label.text = "Can Dive: %s" % str($Dive.dives_left > 0).to_upper()

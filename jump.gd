@@ -1,6 +1,6 @@
 extends Ability
 
-@export var jump_power : float = 10.0
+@export var jump_power : float = 12.0
 
 
 func _physics_process(delta: float) -> void:
